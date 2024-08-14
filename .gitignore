@@ -1,0 +1,7 @@
+# sqlite file
+
+*.sqlite
+
+
+# init modules
+node_modules/
