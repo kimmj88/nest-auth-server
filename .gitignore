@@ -5,3 +5,7 @@
 
 # init modules
 node_modules/
+
+
+# dist
+dist/
