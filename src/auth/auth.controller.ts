@@ -6,10 +6,13 @@ import {
   Response,
   UseGuards,
   Get,
+  Req,
+  Res,
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { CreateUserDto } from "src/user/user.dto";
 import { AuthenticatedGuard, LocalAuthGuard, LoginGuard } from "./auth.guard";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller("auth")
 export class AuthController {
@@ -63,6 +66,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post("/login3")
   login3(@Request() req) {
+    console.log("login3");
     return req.user;
   }
 
@@ -70,6 +74,21 @@ export class AuthController {
   @Get("/test-guard3")
   testGuardWithSession(@Request() req) {
     return req.user;
+  }
+
+  @Get("/logout")
+  logout(@Request() req, @Response() res) {
+    if (req.isAuthenticated()) {
+      req.logout((err) => {
+        if (err) {
+          return res.status(500).json({ message: "Logout failed", error: err });
+        }
+        res.clearCookie("connect.sid", { path: "/" });
+        return res.status(200).json({ message: "Logout successful" });
+      });
+    } else {
+      return res.status(401).json({ message: "No active session" });
+    }
   }
   ///////Login with Session/////////////
 }

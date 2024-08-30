@@ -9,6 +9,7 @@ export class LoginGuard implements CanActivate {
   async canActivate(context: any): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
 
+    const reqcoo = request.cookies["login"];
     if (request.cookies["login"]) {
       return true;
     }
