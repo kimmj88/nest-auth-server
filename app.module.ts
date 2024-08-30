@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { UserModule } from "./user/user.module";
+import { AppController } from "src/app.controller";
+import { AppService } from "src/app.service";
+import { UserModule } from "src/user/user.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "./user/user.entity";
-import { AuthModule } from "./auth/auth.module";
-import { JiraModule } from "./jira/jira.module";
+import { User } from "src/user/user.entity";
+import { AuthModule } from "src/auth/auth.module";
+import { JiraModule } from "src/jira/jira.module";
 
 @Module({
   imports: [
